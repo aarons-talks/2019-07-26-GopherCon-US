@@ -4,7 +4,7 @@ Hey Gophers! We're gonna build an awesome webapp with [Gin](https://github.com/g
 
 The cool part though? Instead of pulling all my webapp's dependencies directly from version control systems like GitHub (which we've always been doing in the past), we're gonna build it using module proxies and [Athens](https://docs.gomods.io).
 
-In fact, we're actually gonna do the build in two different ways! We'll talk about each as we go.
+In fact, we're actually gonna do the build in two different ways! We'll talk about each as we go. I developed and tested this demo on a Zsh shell on MacOS.
 
 >I gave this demo at [GopherCon USA 2019](https://www.gophercon.com/agenda) in the session titled "The Athens Project - A Proxy Server for Go Modules".
 
@@ -23,14 +23,6 @@ Below is how how to do the demo yourself. The instructions are for Linux/Mac OS 
 ## First Way: Build With Athens and an Upstream VCS
 
 Athens starts up initially with nothing in its storage. When you run `go get`, it downloads modules from an "upstream". In this demo, we're configuring it to fetch code directly from the VCS, and then store it forever. You can also configure it to download from module mirrors like proxy.golang.org or gocenter.io.
-
-### Clear Local Module Cache
-
-The `go` toolchain keeps a local on-disk cache of every module & version it's ever downloaded. That means if we really want to download modules, we should empty the cache so that every module is a miss! Here's how to do it:
-
-```console
-$ sudo rm -rf $(go env GOPATH)/pkg/mod
-```
 
 ### Run The Server!
 
@@ -51,7 +43,7 @@ $ export GOPROXY=http://localhost:3000
 Also don't forget to clear your on-disk module cache:
 
 ```console
-$ sudo rm -rf $GOPATH/pkg/mod
+$ sudo rm -rf $(go env GOPATH)/pkg/mod
 ```
 
 And then build and run the server!
@@ -60,7 +52,7 @@ And then build and run the server!
 $ go run .
 ```
 
-## Third Way: Use Your Athens While Offline :scream:
+## Second Way: Use Your Athens While Offline :scream:
 
 Like I mentioned in the last demo, Athens stores the dependencies you use _forever_ in its own storage. That means that you can build your code without access to the internet. Let's do that here!
 
@@ -69,7 +61,7 @@ First, make sure not to shut down the Athens server from last time - its storage
 Next, clear out your cache again:
 
 ```console
-$ sudo rm -rf $GOPATH/pkg/mod
+$ sudo rm -rf $(go env GOPATH)/pkg/mod
 ```
 
 And then, **shut down your internet connection** :see_no_evil:.
