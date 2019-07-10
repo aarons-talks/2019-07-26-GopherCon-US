@@ -31,7 +31,7 @@ We try hard to make it easy to run your own Athens. See [here](https://docs.gomo
 First, run this to start Athens up:
 
 ```console
-$ docker run -p 3000:3000 -e GO_ENV=development gomods/athens:v0.5.0
+$ docker run -p 3000:3000 -e GO_ENV=development -e ATHENS_GO_GET_WORKERS=5 gomods/athens:v0.5.0
 ```
 
 And then to set your `GOPROXY` environment variable to tell modules to use the local server:
