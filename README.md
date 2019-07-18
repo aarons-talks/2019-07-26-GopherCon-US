@@ -40,7 +40,7 @@ And then to set your `GOPROXY` environment variable to tell modules to use the l
 $ export GOPROXY=http://localhost:3000
 ```
 
-Also don't forget to clear your on-disk module cache:
+Also, the Go tool keeps a read-only on-disk cache of every module version you've downloaded for any build. To make it read-only, it stores each file in the cache with `-r--r--r--` permissions. Since that's the case, you need to use `sudo` to clear the cache.
 
 ```console
 $ sudo rm -rf $(go env GOPATH)/pkg/mod
